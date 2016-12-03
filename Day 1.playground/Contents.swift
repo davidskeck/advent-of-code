@@ -49,6 +49,12 @@ func changeDirection(currentTurn: TurnDirections) {
     }
 }
 
+extension String {
+    var integerValue:Int {
+        return Int(String(self)) ?? 0
+    }
+}
+
 struct Point {
     var x = 0
     var y = 0
@@ -56,15 +62,13 @@ struct Point {
 
 let origin = Point()
 var destination = Point()
-
-extension String {
-    var integerValue:Int {
-        return Int(String(self)) ?? 0
-    }
-}
+var previousDestination = Point()
+var destinationsVisited = [Point]()
+var firstDestinationVistedTwice = Point()
 
 for turn in turnByTurn {
     var numberOfSteps = ""
+    previousDestination = destination
     
     for character in turn.characters {
         if character == "L" {
@@ -77,7 +81,6 @@ for turn in turnByTurn {
     }
     
     let numberOfStepsInt = numberOfSteps.integerValue
-    print(numberOfStepsInt)
     
     switch currentDirection {
     case .north:
@@ -89,6 +92,27 @@ for turn in turnByTurn {
     case .west:
         destination.x -= numberOfStepsInt
     }
+    
+    var nextPath = previousDestination
+    for x in 1...numberOfStepsInt {
+        switch currentDirection {
+        case .north:
+            nextPath.y += 1
+        case .east:
+            nextPath.x += 1
+        case .south:
+            nextPath.y -= 1
+        case .west:
+            nextPath.x -= 1
+        }
+        for previousDestination in destinationsVisited {
+            if previousDestination.x == nextPath.x && previousDestination.y == nextPath.y {
+                print("The first location visited twice is", abs(nextPath.x) + abs(nextPath.y), "blocks away.")
+            }
+        }
+        destinationsVisited.append(nextPath)
+    }
+
 }
 
-print("The distance in blocks is", destination.x + destination.y)
+print("The distance in blocks from the final point is", abs(destination.x) + abs(destination.y))
