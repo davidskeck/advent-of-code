@@ -65,6 +65,7 @@ var destination = Point()
 var previousDestination = Point()
 var destinationsVisited = [Point]()
 var firstDestinationVistedTwice = Point()
+var secondVisitFound = false
 
 for turn in turnByTurn {
     var numberOfSteps = ""
@@ -93,24 +94,28 @@ for turn in turnByTurn {
         destination.x -= numberOfStepsInt
     }
     
-    var nextPath = previousDestination
-    for x in 1...numberOfStepsInt {
-        switch currentDirection {
-        case .north:
-            nextPath.y += 1
-        case .east:
-            nextPath.x += 1
-        case .south:
-            nextPath.y -= 1
-        case .west:
-            nextPath.x -= 1
-        }
-        for previousDestination in destinationsVisited {
-            if previousDestination.x == nextPath.x && previousDestination.y == nextPath.y {
-                print("The first location visited twice is", abs(nextPath.x) + abs(nextPath.y), "blocks away.")
+    
+    if (!secondVisitFound) {
+        var nextPath = previousDestination
+        for x in 1...numberOfStepsInt {
+            switch currentDirection {
+            case .north:
+                nextPath.y += 1
+            case .east:
+                nextPath.x += 1
+            case .south:
+                nextPath.y -= 1
+            case .west:
+                nextPath.x -= 1
             }
+            for previousDestination in destinationsVisited {
+                if previousDestination.x == nextPath.x && previousDestination.y == nextPath.y {
+                    secondVisitFound = true
+                    print("The first location visited twice is", abs(nextPath.x) + abs(nextPath.y), "blocks away.")
+                }
+            }
+            destinationsVisited.append(nextPath)
         }
-        destinationsVisited.append(nextPath)
     }
 
 }
