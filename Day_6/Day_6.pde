@@ -31,17 +31,9 @@ void setup() {
     IntDict map_copy = positions[position].frequency_map;
     map_copy.sortValuesReverse();
     
-    int largest_value = 0;
-    int largest_index = 0;
+    String keys[] = map_copy.keyArray();
     
-    for(int i = 0; i < map_copy.size(); i++) {
-      if(map_copy.get(index_to_string(i)) > largest_value) {
-        largest_value = map_copy.get(index_to_string(i));
-        largest_index = i;
-      }
-    }
-    
-    error_corrected_message += index_to_string(largest_index);
+    error_corrected_message += keys[0];
   }
   
   println("The original error-corrected message is " + error_corrected_message + ".");
@@ -52,17 +44,9 @@ void setup() {
     IntDict map_copy = positions[position].frequency_map;
     map_copy.sortValues();
     
-    int smallest_value = puzzle_input.length;
-    int smallest_index = 0;
+    String keys[] = map_copy.keyArray();
     
-    for(int i = 0; i < map_copy.size(); i++) {
-      if(map_copy.get(index_to_string(i)) < smallest_value) {
-        smallest_value = map_copy.get(index_to_string(i));
-        smallest_index = i;
-      }
-    }
-    
-    error_corrected_message += index_to_string(smallest_index);
+    error_corrected_message += keys[0];
   }
   
    println("The real error-corrected message is " + error_corrected_message + ".");
