@@ -28,7 +28,7 @@ String index_to_string(int index) {
 }
 
 void count_letters(Room room_input, String letter_input) {
-  room_input.frequency_map.increment(str(letter_input.charAt(0))); //<>//
+  room_input.frequency_map.increment(str(letter_input.charAt(0)));
 }
 
 void compute_checksum(Room this_room) {
