@@ -1,3 +1,8 @@
+# David Keck
+# Advent of Code 2016
+# Day 7 Parts 1 & 2
+
+
 import re
 
 
