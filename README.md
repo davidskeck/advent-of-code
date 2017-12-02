@@ -1,7 +1,7 @@
-# Advent of Code 2016
+# Advent of Code 2017
+
+My solutions to the Advent of Code 2017.
 
 http://adventofcode.com
 
-I'll be uploading my solutions to each day of challenges for Advent of Code 2016.
-
-Not much in the way of polish or error checking. If I get the right answer, it gets uploaded! :)
+[AOC 2016 is here.](/AOC_2016)
