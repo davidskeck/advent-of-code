@@ -8,7 +8,7 @@ def main():
 
     puzzle_input.close()
 
-    # Part One & Two
+    # Parts One & Two
 
     memory_blocks = puzzle_input_list[:]
     previous_block_arrangements = []
