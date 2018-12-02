@@ -6,5 +6,5 @@ http://adventofcode.com
 
 ## Previous Years
 
-* [AOC 2017 - 6 Days completed](/AOC_2017)
-* [AOC 2016 - 6 Days completed](/AOC_2016)
+* [AOC 2017](/AOC_2017)
+* [AOC 2016](/AOC_2016)
