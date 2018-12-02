@@ -1,6 +1,5 @@
 // Notes:
-// Wow. This challenge was TOUGH. Mainly because I implemented the whole thing
-// in command-line Swift. I'm using the latest snapshot too (November 30th).
+// Command-line Swift. Using the latest snapshot too (November 30th).
 // The hardest parts were getting the file to open, which is super easy in other languages
 // and finding a fast way to do the second part, which requires a lot of iterating.
 // I wonder if I got into trouble because of Swift's problems with large arrays.
