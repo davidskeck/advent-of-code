@@ -42,13 +42,11 @@ do {
         for line in lines {
             if let currentNumber = Int(line) {
                 totalValue += currentNumber
-
-                if !firstRepeatingNumberFound {
-                    if valueHistory.contains(totalValue) {
-                        firstRepeatingNumber = totalValue
-                        firstRepeatingNumberFound = true
-                        break
-                    }
+                
+                if valueHistory.contains(totalValue) {
+                    firstRepeatingNumber = totalValue
+                    firstRepeatingNumberFound = true
+                    break
                 }
 
                 valueHistory.insert(totalValue)
