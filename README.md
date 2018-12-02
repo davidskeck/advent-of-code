@@ -4,6 +4,7 @@ My solutions to the Advent of Code 2018.
 
 http://adventofcode.com
 
-[AOC 2017 is here.](/AOC_2017)
+## Previous Years
 
-[AOC 2016 is here.](/AOC_2016)
+* [AOC 2017](/AOC_2017)
+* [AOC 2016](/AOC_2016)
