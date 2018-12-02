@@ -8,7 +8,7 @@
 
 import Foundation
 
-let inputFilePath = URL(fileURLWithPath: FileManager.default.currentDirectoryPath + "/Day 1/input.txt")
+let inputFilePath = URL(fileURLWithPath: FileManager.default.currentDirectoryPath + "/input.txt")
 
 do {
     let text = try String(contentsOf: inputFilePath, encoding: .utf8)
