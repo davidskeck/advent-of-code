@@ -5,6 +5,8 @@
 // I wonder if I got into trouble because of Swift's problems with large arrays.
 // Good challange overall, really demonstrates how important it can be to have the
 // right data structure for certain problems. :D
+// Created using Apple Swift version 4.2.1 (swiftlang-1000.11.42 clang-1000.11.45.1)
+// Target: x86_64-apple-darwin18.2.0
 
 import Foundation
 
