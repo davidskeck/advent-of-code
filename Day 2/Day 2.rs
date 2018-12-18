@@ -13,27 +13,27 @@ fn main()
 
     for line in input
     {
-    	let mut two_found = false;
-    	let mut three_found = false;
-    	let mut letter_counts = BTreeMap::new();
+        let mut two_found = false;
+        let mut three_found = false;
+        let mut letter_counts = BTreeMap::new();
         for character in line.chars()
         {
             *letter_counts.entry(character).or_insert(0) += 1;
         }
         for (_, count) in letter_counts
         {
-        	if count == 2 && !two_found
-        	{
+            if count == 2 && !two_found
+            {
                 two_found = true;
                 num_two += 1;
         	}
-        	if count == 3 && !three_found
-        	{
+            if count == 3 && !three_found
+            {
                 three_found = true;
                 num_three += 1;
-        	}
-        	if two_found && three_found
-        	{
+            }
+            if two_found && three_found
+            {
         		break;
         	}
         }
