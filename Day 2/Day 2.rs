@@ -26,7 +26,7 @@ fn main()
             {
                 two_found = true;
                 num_two += 1;
-        	}
+            }
             if count == 3 && !three_found
             {
                 three_found = true;
