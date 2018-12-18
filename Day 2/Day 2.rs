@@ -35,7 +35,7 @@ fn main()
             if two_found && three_found
             {
         		break;
-        	}
+            }
         }
     }
     print!("Part one: {}\n", num_two * num_three);
