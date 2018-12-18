@@ -24,8 +24,8 @@ fn main()
         {
         	if count == 2 && !two_found
         	{
-        	    two_found = true;
-        	    num_two += 1;
+                two_found = true;
+                num_two += 1;
         	}
         	if count == 3 && !three_found
         	{
