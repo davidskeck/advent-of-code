@@ -1,8 +1,10 @@
-# Advent of Code 2018
+# Advent of Code
 
-My solutions to the Advent of Code 2018.
+My solutions to the Advent of Code across the years.
 
 http://adventofcode.com
+
+* [AOC 2020](/AOC_2020)
 
 ## Previous Years
 
