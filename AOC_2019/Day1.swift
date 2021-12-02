@@ -103,7 +103,7 @@ let puzzleInput = """
 
 import Foundation
 
-func calculateFuelNeeded(weight: Int) -&gt; Int {
+func calculateFuelNeeded(weight: Int) -> Int {
     var tempWeight = weight
     tempWeight /= 3
     tempWeight -= 2
