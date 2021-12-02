@@ -9,6 +9,7 @@ http://adventofcode.com
 ## Previous Years
 
 * [AOC 2020](/AOC_2020)
+* [AOC 2019](/AOC_2019)
 * [AOC 2018](/AOC_2018)
 * [AOC 2017](/AOC_2017)
 * [AOC 2016](/AOC_2016)
