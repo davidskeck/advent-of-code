@@ -126,7 +126,7 @@ for line in lines {
     if let weight = Int(line) {
         var currentFuelNeeded = calculateFuelNeeded(weight: weight)
         revisedFuelTotal += currentFuelNeeded
-        while currentFuelNeeded >= 0 {
+        while currentFuelNeeded > 0 {
             currentFuelNeeded = calculateFuelNeeded(weight: currentFuelNeeded)
             if currentFuelNeeded > 0 {
                 revisedFuelTotal += currentFuelNeeded
