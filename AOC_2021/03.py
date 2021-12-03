@@ -46,7 +46,6 @@ def main():
         for value in co2_result_set:
             if int(value[index]) == 1:
                 co2_accumulator += 1
-        
 
         if o2_accumulator >= len(o2_result_set) / 2:
             o2_bit = 1
@@ -58,7 +57,6 @@ def main():
         else:
             co2_bit = 1
         
-
         temp_o2_set = []
         temp_co2_set = []
         for value in o2_result_set:
