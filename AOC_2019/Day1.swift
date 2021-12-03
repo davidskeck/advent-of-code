@@ -114,7 +114,7 @@ var lines = puzzleInput.split { $0.isNewline }
 var totalFuelNeeded = 0
 
 for line in lines {
-    if var weight = Int(line) {
+    if let weight = Int(line) {
         totalFuelNeeded += calculateFuelNeeded(weight: weight)
     }
 }
@@ -123,17 +123,17 @@ print(totalFuelNeeded)
 var revisedFuelTotal = 0
 
 for line in lines {
-    if var weight = Int(line) {
+    if let weight = Int(line) {
         var currentFuelNeeded = calculateFuelNeeded(weight: weight)
         revisedFuelTotal += currentFuelNeeded
-        while currentFuelNeeded &gt; 0 {
+        while currentFuelNeeded >= 0 {
             currentFuelNeeded = calculateFuelNeeded(weight: currentFuelNeeded)
-            if currentFuelNeeded &gt; 0 {
+            if currentFuelNeeded > 0 {
                 revisedFuelTotal += currentFuelNeeded
             }
         }
     }
 }
 
-revisedFuelTotal
+print(revisedFuelTotal)
 
