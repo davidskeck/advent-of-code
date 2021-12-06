@@ -22,8 +22,6 @@ def main():
     for segment in puzzle_input:
         vent_lines.append(VentLine(segment))
 
-    max_x = 0
-    max_y = 0
     for line in vent_lines:
         if line.is_vert_horiz:
             pass
