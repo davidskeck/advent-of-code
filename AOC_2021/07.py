@@ -43,7 +43,6 @@ def main():
         if least_fuel is None or fuel < least_fuel:
             least_fuel = fuel
 
-
     print(f"Part Two: {least_fuel}")
 
 
