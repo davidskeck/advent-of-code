@@ -2,6 +2,7 @@
 # Day 5
 
 import os
+from collections import Counter
 
 
 class VentLine:
@@ -59,27 +60,28 @@ def main():
     for segment in puzzle_input:
         vent_lines.append(VentLine(segment))
     
-    collisions = []
+    p1_points = []
+    p2_points = []
     for line in vent_lines:
         if line.is_vert_horiz:
-            for next_line in vent_lines:
-                if next_line is not line and next_line.is_vert_horiz:
-                    for position in list(set(next_line.path) & set(line.path)):
-                        if position in line.path and position not in collisions:
-                            collisions.append(position)
-    
-    print(f"Part One: {len(collisions)}")
-    
-    collisions = []
-    for line in vent_lines:
-        for next_line in vent_lines:
-            if next_line is not line:
-                 if next_line is not line:
-                    for position in list(set(next_line.path) & set(line.path)):
-                        if position in line.path and position not in collisions:
-                            collisions.append(position)
- 
-    print(f"Part Two: {len(collisions)}")
+            p1_points.extend(line.path)
+        p2_points.extend(line.path)
+
+    point_counter = Counter(p1_points)
+    collisions = 0
+    for key, value in point_counter.items():
+        if value > 1:
+            collisions += 1
+
+    print(f"Part One: {collisions}")
+
+    point_counter = Counter(p2_points)
+    collisions = 0
+    for key, value in point_counter.items():
+        if value > 1:
+            collisions += 1
+
+    print(f"Part Two: {collisions}")
 
 
 if __name__ == "__main__":
