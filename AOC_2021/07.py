@@ -38,8 +38,6 @@ def main():
     print(f"Part One: {least_fuel}")
     
     least_fuel = None
-    max_position = crabs[-1]
-    min_position = crabs[0]
     for position in range (min_position, max_position):
         fuel = recalculate_fuel(crabs, position)
         if least_fuel is None or fuel < least_fuel:
