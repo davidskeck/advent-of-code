@@ -2,7 +2,7 @@
 # Day 8
 
 import os
-from enum import Enum, auto
+
 
 ONE_SEG_CNT = 2
 FOUR_SEG_CNT = 4
