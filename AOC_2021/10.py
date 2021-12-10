@@ -21,7 +21,6 @@ def main():
     incomplete_openers = []
     for line in puzzle_input:
         pending_openers = []
-        line_corrupt = False
         for index, char in enumerate(line):
             if char in openers:
                 pending_openers.append(char)
