@@ -1,9 +1,12 @@
 # Advent of Code 2022
 # Day 1
 
+input_file = "input.txt"
+#input_file = "example.txt"
+
 
 def main():
-    with open("input.txt") as puzzle_data:
+    with open(input_file) as puzzle_data:
         puzzle_input = puzzle_data.read().split('\n')  # Interestingly have to split on just the newline here... Otherwise you can't tell when one elf's calorie count ends and another starts.
 
     calorie_counts = []
