@@ -7,7 +7,7 @@ input_file = "input.txt"
 
 def main():
     with open(input_file) as puzzle_data:
-        puzzle_input = puzzle_data.read().split()
+        puzzle_input = puzzle_data.read().split('\n')
 
     print(puzzle_input)
 
