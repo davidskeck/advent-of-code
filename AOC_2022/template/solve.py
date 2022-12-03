@@ -13,15 +13,16 @@ def main(input_file):
     with open(input_file) as puzzle_data:
         puzzle_input = puzzle_data.read().split('\n')
 
-    answer = 0
 
     # Part One
+    answer = 0
 
 
     pyperclip.copy(answer)
     print(f"{input_file.split('.')[0].capitalize()} Part One: {answer}")
 
     # Part Two
+    #answer = 0
 
 
     pyperclip.copy(answer)
