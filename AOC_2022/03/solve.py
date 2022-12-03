@@ -1,5 +1,5 @@
 # Advent of Code 2022
-# Day
+# Day 3
 
 import pyperclip
 
