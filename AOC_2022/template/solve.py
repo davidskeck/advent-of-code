@@ -13,7 +13,6 @@ def main(input_file):
     with open(input_file) as puzzle_data:
         puzzle_input = puzzle_data.read().split('\n')
 
-
     # Part One
     answer = 0
 
