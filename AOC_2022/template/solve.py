@@ -11,7 +11,7 @@ input_files = [
 
 def main(input_file):
     with open(input_file) as puzzle_data:
-        puzzle_input = puzzle_data.read().split('\n')
+        puzzle_input = [line for line in puzzle_data.read().split('\n') if line != ""]
 
     # Part One
     answer = 0
