@@ -34,15 +34,12 @@ def main(input_file):
         puzzle_input = [line for line in puzzle_data.read().split('\n') if line != ""]
 
     # Part One
-    answer = 0
     answer = find_marker(puzzle_input, 4)
     pyperclip.copy(answer)
     print(f"{input_file.split('.')[0].capitalize()} Part One: {answer}")
 
     # Part Two
-    answer = 0
     answer = find_marker(puzzle_input, 14)
-
     pyperclip.copy(answer)
     print(f"{input_file.split('.')[0].capitalize()} Part Two: {answer}")
 
