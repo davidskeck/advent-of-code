@@ -19,7 +19,6 @@ def main(input_file):
 
     # Part One
     answer = 0
-
     directories = {}
     curr_dir_pos = ''
     for line in puzzle_input:
