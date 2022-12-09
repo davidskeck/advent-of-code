@@ -24,36 +24,36 @@ def move_position(position, direction):
     return position
 
 
-def get_trailing_position(curr_head_position, knot_position):
-    x_diff = curr_head_position[0] - knot_position[0]
-    y_diff = curr_head_position[1] - knot_position[1]
+def get_trailing_position(leading_position, trailing_position):
+    x_diff = leading_position[0] - trailing_position[0]
+    y_diff = leading_position[1] - trailing_position[1]
     is_adjacent = abs(x_diff) <= 1 and abs(y_diff) <= 1
 
     if not is_adjacent:
-        if curr_head_position[0] == knot_position[0] or curr_head_position [1] == knot_position[1]:
+        if leading_position[0] == trailing_position[0] or leading_position [1] == trailing_position[1]:
             if abs(x_diff) >= 2:
                 if x_diff > 0:
-                    knot_position[0] += 1
+                    trailing_position[0] += 1
                 else:
-                    knot_position[0] -= 1
+                    trailing_position[0] -= 1
             elif abs(y_diff) >= 2:
                 if y_diff > 0:
-                    knot_position[1] += 1
+                    trailing_position[1] += 1
                 else:
-                    knot_position[1] -= 1
+                    trailing_position[1] -= 1
         else:
             if abs(x_diff) >= 1:
                 if x_diff > 0:
-                    knot_position[0] += 1
+                    trailing_position[0] += 1
                 else:
-                    knot_position[0] -= 1
+                    trailing_position[0] -= 1
             if abs(y_diff) >= 1:
                 if y_diff > 0:
-                    knot_position[1] += 1
+                    trailing_position[1] += 1
                 else:
-                    knot_position[1] -= 1
+                    trailing_position[1] -= 1
 
-    return knot_position
+    return trailing_position
 
 
 def main(input_file):
