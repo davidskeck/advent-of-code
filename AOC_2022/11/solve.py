@@ -81,7 +81,6 @@ def main(input_file):
             monkey.clear_thrown_items()
 
     monkey_activity = [monkey.number_of_inspections for monkey in monkeys.values()]
-
     answer = math.prod(sorted(monkey_activity)[-2:])
 
     pyperclip.copy(answer)
@@ -106,8 +105,8 @@ def main(input_file):
             monkey.clear_thrown_items()
 
     monkey_activity = [monkey.number_of_inspections for monkey in monkeys.values()]
-
     answer = math.prod(sorted(monkey_activity)[-2:])
+
     pyperclip.copy(answer)
     print(f"{input_file.split('.')[0].capitalize()} Part Two: {answer}")
 
