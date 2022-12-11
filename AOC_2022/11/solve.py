@@ -29,9 +29,8 @@ class Monkey:
 
     def inspect(self, part_one=False):
         for index, level in enumerate(self.worry_levels):
-            old = level
-            operation = self.operation.strip()[3:]
-            self.worry_levels[index] = eval(f"{old} {operation}", locals())
+            old = level  # use the same variable name that is in the text for the operation
+            self.worry_levels[index] = eval(f"{self.operation}", locals())
             if part_one:
                 self.worry_levels[index] //= 3
             self.number_of_inspections += 1
