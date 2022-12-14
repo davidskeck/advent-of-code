@@ -86,8 +86,7 @@ def main(input_file):
     # Part Two
     answer = 0
     divider_packets = [[[2]], [[6]]]
-    total_input = puzzle_input
-    total_packets = [eval(line) for line in total_input] + divider_packets
+    total_packets = [eval(line) for line in puzzle_input] + divider_packets
     sorted_packets = copy.deepcopy(total_packets)
 
     for completed_packets in range(len(sorted_packets)):
