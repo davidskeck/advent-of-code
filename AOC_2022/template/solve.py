@@ -31,7 +31,7 @@ def main(input_file):
 
 
 if __name__ == "__main__":
-    for file in input_files:
+    for puzzle_file in input_files:
         start_time = time.time()
-        main(file)
-        print(f"{file.split('.')[0].capitalize()} Time: {time.time() - start_time:.2f}s\n")
+        main(puzzle_file)
+        print(f"{puzzle_file.split('.')[0].capitalize()} Time: {time.time() - start_time:.2f}s\n")

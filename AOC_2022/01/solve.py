@@ -1,14 +1,22 @@
 # Advent of Code 2022
 # Day 1
 
-input_file = "input.txt"
-#input_file = "example.txt"
+import time
+
+import pyperclip
+
+input_files = [
+    "example.txt",
+    "input.txt"
+]
 
 
-def main():
+def main(input_file):
     with open(input_file) as puzzle_data:
         puzzle_input = puzzle_data.read().split('\n')  # Interestingly have to split on just the newline here... Otherwise you can't tell when one elf's calorie count ends and another starts.
 
+    # Part One
+    answer = 0
     calorie_counts = []
     current_cals = 0
     for input in puzzle_input:
@@ -19,9 +27,18 @@ def main():
             current_cals = 0
 
     sorted_calories = sorted(calorie_counts)
-    print(f"The most calories carried by an elf is: {sorted_calories[-1]}.")
-    print(f"The sum of the calories carried by the top three elves is: {sum(sorted_calories[-3:])}.")
+    answer = sorted_calories[-1]
+    pyperclip.copy(answer)
+    print(f"{input_file.split('.')[0].capitalize()} Part One: {answer}")
+
+    # Part Two
+    answer = sum(sorted_calories[-3:])
+    pyperclip.copy(answer)
+    print(f"{input_file.split('.')[0].capitalize()} Part One: {answer}")
 
 
 if __name__ == "__main__":
-    main()
+    for puzzle_file in input_files:
+        start_time = time.time()
+        main(puzzle_file)
+        print(f"{puzzle_file.split('.')[0].capitalize()} Time: {time.time() - start_time:.2f}s\n")

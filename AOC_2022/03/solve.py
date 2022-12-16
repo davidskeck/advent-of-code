@@ -1,6 +1,8 @@
 # Advent of Code 2022
 # Day 3
 
+import time
+
 import pyperclip
 
 input_files = [
@@ -57,5 +59,7 @@ def main(input_file):
 
 
 if __name__ == "__main__":
-    for file in input_files:
-        main(file)
+    for puzzle_file in input_files:
+        start_time = time.time()
+        main(puzzle_file)
+        print(f"{puzzle_file.split('.')[0].capitalize()} Time: {time.time() - start_time:.2f}s\n")

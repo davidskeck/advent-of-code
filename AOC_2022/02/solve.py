@@ -1,17 +1,23 @@
 # Advent of Code 2022
 # Day 2
 
+import time
 
-input_file = "input.txt"
-#input_file = "example.txt"
+import pyperclip
+
+input_files = [
+    "example.txt",
+    "input.txt"
+]
 
 play_dict = {"A": 1, "B": 2, "C": 3, "X": 1, "Y": 2, "Z": 3}
 
 
-def main():
+def main(input_file):
     with open(input_file) as puzzle_data:
         puzzle_input = puzzle_data.read().split('\n')
 
+    # Part One
     total_score = 0
     for round in puzzle_input:
         round = round.split()
@@ -27,8 +33,11 @@ def main():
             elif selected == "Z" and opponent == "B":
                 total_score += 6
 
-    print(f"Total score is: {total_score}")
+    answer = total_score
+    pyperclip.copy(answer)
+    print(f"{input_file.split('.')[0].capitalize()} Part One: {answer}")
 
+    # Part Two
     total_score = 0
     for round in puzzle_input:
         round = round.split()
@@ -56,8 +65,13 @@ def main():
 
             total_score += play_dict[selected]
 
-    print(f"Total score is: {total_score}")
+    answer = total_score
+    pyperclip.copy(answer)
+    print(f"{input_file.split('.')[0].capitalize()} Part Two: {answer}")
 
 
 if __name__ == "__main__":
-    main()
+    for puzzle_file in input_files:
+        start_time = time.time()
+        main(puzzle_file)
+        print(f"{puzzle_file.split('.')[0].capitalize()} Time: {time.time() - start_time:.2f}s\n")
