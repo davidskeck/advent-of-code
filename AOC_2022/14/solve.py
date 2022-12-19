@@ -13,36 +13,38 @@ input_files = [
 ]
 
 SAND_POUR_POINT = (500, 0)
-DISPLAY_PADDING = 400
+DISPLAY_PADDING_X = 300
+DISPLAY_PADDING_Y = 20
 ROCK_COLOR = 13
 SAND_COLORS = [9, 10, 15]
+OFFSCREEN_RENDER = False
 
 
 class SandGrain:
-    def __init__(self, starting_point, floor_y):
+    def __init__(self, starting_point, floor_y, pyxel_image=None):
         self.x, self.y = starting_point
         self.floor_y = floor_y
         self.color = random.choice(SAND_COLORS)
         self.can_move = None
         self.on_floor = False
         self.in_abyss = False
+        self.pyxel_image = pyxel_image
 
     def update(self):
         self.can_move = True
-        if pyxel.pget(self.x, self.y + 1) == 0:
+        canvas = pyxel if self.pyxel_image is None else self.pyxel_image
+        if canvas.pget(self.x, self.y + 1) == 0:
             self.y += 1
-        elif pyxel.pget(self.x - 1, self.y + 1) == 0:
+        elif canvas.pget(self.x - 1, self.y + 1) == 0:
             self.y += 1
             self.x -= 1
-        elif pyxel.pget(self.x + 1, self.y + 1) == 0:
+        elif canvas.pget(self.x + 1, self.y + 1) == 0:
             self.y += 1
             self.x += 1
         else:
             self.can_move = False
 
-        if self.x < 0 or self.x > pyxel.width:
-            self.in_abyss = True
-        if self.y < 0 or self.y >= self.floor_y + 1:
+        if self.y >= self.floor_y - 2:
             self.in_abyss = True
 
         if self.y >= self.floor_y:
@@ -53,11 +55,10 @@ class PyxelApp:
     def __init__(self, input_file):
         with open(input_file) as puzzle_data:
             self.puzzle_input = [line for line in puzzle_data.read().split('\n') if line != ""]
-        self.answer = 0
+        self.part_one_answer = 0
+        self.part_two_answer = 0
         self.grains_at_rest = 0
-        self.part_two_known = False
 
-        # Part One
         self.max_x_size = 0
         self.min_x_size = None
         self.max_y_size = 0
@@ -69,10 +70,12 @@ class PyxelApp:
         self.parse_puzzle_input()
         self.prepare_pyxel_canvas()
 
-        pyxel.run(self.pyxel_update, self.pyxel_draw)
+        if OFFSCREEN_RENDER:
+            self.offscreen_render()
+        else:
+            self.add_one_sand_grain()
 
-        pyperclip.copy(answer)
-        print(f"{input_file.split('.')[0].capitalize()} Part One: {answer}")
+        pyxel.run(self.update, self.draw)
 
     def parse_puzzle_input(self):
         for line in self.puzzle_input:
@@ -96,80 +99,100 @@ class PyxelApp:
 
         self.floor_y = self.get_scaled_point((0, self.max_y_size + 2))[1]
 
-        x_canvas_size = self.max_x_size - self.min_x_size + DISPLAY_PADDING
-        y_canvas_size = self.max_y_size + DISPLAY_PADDING
+        x_canvas_size = self.max_x_size - self.min_x_size + DISPLAY_PADDING_X
+        y_canvas_size = self.max_y_size + DISPLAY_PADDING_Y
         pyxel.init(x_canvas_size, y_canvas_size, fps=120)
+        self.pyxel_image = pyxel.Image(x_canvas_size, y_canvas_size)
 
     def get_scaled_point(self, position):
-        x_pos = position[0] - self.min_x_size + (DISPLAY_PADDING / 2)
-        y_pos = position[1] + (DISPLAY_PADDING / 2)
+        x_pos = position[0] - self.min_x_size + (DISPLAY_PADDING_X / 2) + 25
+        y_pos = position[1] + (DISPLAY_PADDING_Y / 2)
 
         return x_pos, y_pos
 
-    def draw_rock_lines(self):
+    def draw_rock_lines(self, on_image=False):
+        canvas = pyxel if not on_image else self.pyxel_image
         for line in self.rock_lines:
             start_point = line[0]
             for point_index in range(1, len(line)):
                 end_point = line[point_index]
                 x1, y1 = self.get_scaled_point(start_point)
                 x2, y2 = self.get_scaled_point(end_point)
-                pyxel.line(x1, y1, x2, y2, ROCK_COLOR)
+                canvas.line(x1, y1, x2, y2, ROCK_COLOR)
                 start_point = end_point
 
-        pyxel.line(0, self.floor_y, pyxel.width, self.floor_y, ROCK_COLOR)
+        canvas.line(0, self.floor_y, pyxel.width, self.floor_y, ROCK_COLOR)
 
     def add_one_sand_grain(self):
+        canvas = None if not OFFSCREEN_RENDER else self.pyxel_image
         starting_point = self.get_scaled_point(SAND_POUR_POINT)
-        if pyxel.pget(starting_point[0], starting_point[1]) == 0:
-            self.sand_grains.append(SandGrain(starting_point, self.floor_y))
-        else:
-            self.part_two_known = True
+        self.sand_grains.append(SandGrain(starting_point, self.floor_y, pyxel_image=canvas))
 
-    def pyxel_update(self):
-        for grain in self.sand_grains:
-            grain.update()
-        all_grains_at_rest = True
-        self.grains_at_rest = 0
-        any_grains_in_abyss = False
-        for grain in self.sand_grains:
-            if grain.can_move:
-                all_grains_at_rest = False
+    def update_grains(self):
+        grain_was_added = False
+        current_grain = self.sand_grains[-1]
+        current_grain.update()
+        all_grains_at_rest = not current_grain.can_move
+        self.grains_at_rest = len(self.sand_grains) if all_grains_at_rest else len(self.sand_grains) - 1
+
+        if self.part_one_answer == 0:
+            if current_grain.in_abyss:
+                print(f"P1: {self.grains_at_rest}")
+                self.part_one_answer = self.grains_at_rest
+
+        if all_grains_at_rest:
+            latest_grain_rest_point = (current_grain.x, current_grain.y)
+            if latest_grain_rest_point != self.get_scaled_point(SAND_POUR_POINT):
+                self.add_one_sand_grain()
+                grain_was_added = True
             else:
-                self.grains_at_rest += 1
-            if grain.in_abyss:
-                any_grains_in_abyss = True
+                if self.part_two_answer == 0:
+                    print(f"P2: {self.grains_at_rest}")
+                    self.part_two_answer = self.grains_at_rest
 
-        if any_grains_in_abyss:
-            print(f"{self.grains_at_rest}")
-            self.answer = self.grains_at_rest
-            pyperclip.copy(self.answer)
+        return grain_was_added
 
-        if not any_grains_in_abyss and all_grains_at_rest or pyxel.frame_count % 10 == 0:
-            self.add_one_sand_grain()
+    def offscreen_render(self):
+        self.pyxel_image.cls(0)
+        self.draw_rock_lines(on_image=True)
+        self.add_one_sand_grain()
+        grain_was_added = self.update_grains()
+        while self.part_one_answer == 0 or self.part_two_answer == 0 or grain_was_added:
+            grain_was_added = self.update_grains()
+            if grain_was_added:
+                grain = self.sand_grains[-2]
+                self.pyxel_image.pset(grain.x, grain.y, grain.color)
+            else:
+                grain = self.sand_grains[-1]
+                if not grain.can_move:
+                    self.pyxel_image.pset(grain.x, grain.y, grain.color)
+
+            if self.part_one_answer > 0:
+                self.pyxel_image.text(1, 1, f"P1: {self.part_one_answer}", 3)
+            if self.part_two_answer > 0:
+                self.pyxel_image.text(1, 10, f"P2: {self.part_two_answer}", 3)
+
+    def update(self):
         if pyxel.btnp(pyxel.KEY_Q):
             pyxel.quit()
 
+    def draw(self):
+        if OFFSCREEN_RENDER:
+            pyxel.blt(0, 0, self.pyxel_image, 0, 0, self.pyxel_image.width, self.pyxel_image.height)
+        else:
+            if self.part_one_answer == 0 or self.part_two_answer == 0:
+                pyxel.cls(0)
+                self.draw_rock_lines()
+                for grain in self.sand_grains:
+                    pyxel.pset(grain.x, grain.y, grain.color)
 
-    def pyxel_draw(self):
-        pyxel.cls(0)
-        self.draw_rock_lines()
-        for grain in self.sand_grains:
-            pyxel.pset(grain.x, grain.y, grain.color)
-        answer_color = 3 if self.answer > 0 else 7
-        if self.part_two_known:
-            answer_color = 8
-            print(f"{self.grains_at_rest}")
-        pyxel.text(1, 1, f"{self.grains_at_rest}", answer_color)
+                self.update_grains()
 
-
-def main(input_file):
-    app = PyxelApp(input_file)
-    #pyperclip.copy(answer)
-    #print(f"{input_file.split('.')[0].capitalize()} Part Two: {answer}")
+                if self.part_one_answer > 0:
+                    pyxel.text(1, 1, f"P1: {self.part_one_answer}", 3)
+                if self.part_two_answer > 0:
+                    pyxel.text(1, 10, f"P2: {self.part_two_answer}", 3)
 
 
 if __name__ == "__main__":
-    for puzzle_file in input_files:
-        start_time = time.time()
-        main(puzzle_file)
-        print(f"{puzzle_file.split('.')[0].capitalize()} Time: {time.time() - start_time:.2f}s\n")
+    app = PyxelApp(input_files[0])
