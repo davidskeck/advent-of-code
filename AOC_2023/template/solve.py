@@ -1,4 +1,4 @@
-# Advent of Code <year>
+# Advent of Code 2023
 # Day <day>
 
 import time
@@ -12,8 +12,8 @@ input_files = [
 
 
 def main(input_file):
-    with open(input_file) as puzzle_data:
-        puzzle_input = [line for line in puzzle_data.read().split('\n') if line != ""]
+    with open(input_file) as input_data:
+        puzzle_input = [line for line in input_data.read().split('\n') if line != ""]
 
     # Part One
     answer = 0
