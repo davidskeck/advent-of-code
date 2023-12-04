@@ -1,5 +1,5 @@
 # Advent of Code 2023
-# Day <day>
+# Day 04
 
 import time
 
@@ -7,7 +7,7 @@ import pyperclip
 
 input_files = [
     "example.txt",
-    "input.txt"
+    # "input.txt"
 ]
 
 
@@ -18,20 +18,22 @@ def main(input_file):
     # Part One
     answer = 0
 
+    print(puzzle_input)
+
 
     pyperclip.copy(answer)
     print(f"{input_file.split('.')[0].capitalize()} Part One: {answer}")
 
     # Part Two
-    #answer = 0
+    answer = 0
 
 
-    pyperclip.copy(answer)
+    #pyperclip.copy(answer)
     print(f"{input_file.split('.')[0].capitalize()} Part Two: {answer}")
 
 
 if __name__ == "__main__":
-    for puzzle_file in input_files:
+    for input_file in input_files:
         start_time = time.time()
-        main(puzzle_file)
-        print(f"{puzzle_file.split('.')[0].capitalize()} Time: {time.time() - start_time:.2f}s\n")
+        main(input_file)
+        print(f"{input_file.split('.')[0].capitalize()} Time: {time.time() - start_time:.2f}s\n")
