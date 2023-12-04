@@ -27,7 +27,6 @@ class ScratchCard:
                 self.worth *= 2
         
         self.cards_won = [self.number + i for i in range(1, self.num_winning_numbers + 1)]
-        print(self.cards_won)
 
 def main(input_file):
     with open(input_file) as input_data:
@@ -57,7 +56,6 @@ def main(input_file):
             card_copies.append(scratch_cards[card_num - 1])
     
     answer = len(scratch_cards) + len(card_copies)
-
 
     pyperclip.copy(answer)
     print(f"{input_file.split('.')[0].capitalize()} Part Two: {answer}")
