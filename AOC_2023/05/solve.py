@@ -77,8 +77,6 @@ def main(input_file):
                 lookahead_index += 1
             mappings.append(GardenMapping(puzzle_input[index: lookahead_index]))
 
-    total_seeds = len(seeds)
-    seeds_tested = 0
     answer = float('inf')
     for seed in seeds:
         curr_value = seed
@@ -90,10 +88,9 @@ def main(input_file):
         
         if curr_value < answer:
             answer = curr_value
-        seeds_tested += 1
 
     pyperclip.copy(answer)
-    print(f"\n{input_file.split('.')[0].capitalize()} Part One: {answer}")
+    print(f"{input_file.split('.')[0].capitalize()} Part One: {answer}")
 
     # Part Two
     answer = 0
@@ -122,7 +119,7 @@ def main(input_file):
     percentage_queue = Queue()
     seed_processors = []
     
-    # This will take about 5000 seconds to execute!
+    # WARNING: This will take about 5000 seconds to execute!
     # Didn't optimize because I wanted to see if the brute force solution was possible... It is... barely.
     for seed_range in seed_ranges:
         seed_range_length = seed_range[1]
@@ -139,7 +136,6 @@ def main(input_file):
     # progress_writer_process = Process(target=progress_writer, args=(total_seeds, percentage_queue), daemon=True)
     # progress_writer_process.start()
 
-    print(f"Starting {len(seed_processors)} seed processors.")
     for processor in seed_processors:
         processor.join()
 
@@ -149,7 +145,7 @@ def main(input_file):
             answer = curr_answer
 
     pyperclip.copy(answer)
-    print(f"\n{input_file.split('.')[0].capitalize()} Part Two: {answer}")
+    print(f"{input_file.split('.')[0].capitalize()} Part Two: {answer}")
 
 
 if __name__ == "__main__":
