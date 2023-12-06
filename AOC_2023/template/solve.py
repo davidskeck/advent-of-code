@@ -17,18 +17,19 @@ def main(input_file):
 
     # Part One
     answer = 0
-
-    print(puzzle_input)
+    
+    for line in puzzle_input:
+        print(line)
 
 
     pyperclip.copy(answer)
     print(f"{input_file.split('.')[0].capitalize()} Part One: {answer}")
 
     # Part Two
-    answer = 0
+    # answer = 0
 
 
-    #pyperclip.copy(answer)
+    pyperclip.copy(answer)
     print(f"{input_file.split('.')[0].capitalize()} Part Two: {answer}")
 
 

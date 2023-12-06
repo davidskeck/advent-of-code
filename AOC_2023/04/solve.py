@@ -28,6 +28,7 @@ class ScratchCard:
         
         self.cards_won = [self.number + i for i in range(1, self.num_winning_numbers + 1)]
 
+
 def main(input_file):
     with open(input_file) as input_data:
         puzzle_input = [line for line in input_data.read().split('\n') if line != ""]
