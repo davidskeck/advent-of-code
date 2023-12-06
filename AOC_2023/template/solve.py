@@ -1,5 +1,5 @@
 # Advent of Code 2023
-# Day 04
+# Day <day>
 
 import time
 
