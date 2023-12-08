@@ -73,15 +73,13 @@ def main(input_file):
     while not end_found:
         for direction in list(instructions):
             answer += 1
+            curr_nodes_pos = ""
             for index, curr_node in enumerate(current_nodes):
                 next_node_name = curr_node.elements[direction_dict.get(direction)]
                 current_nodes[index] = node_dict[next_node_name]
-            all_end_in_z = True
-            for node in current_nodes:
-                if node.name[-1] != "Z":
-                    all_end_in_z = False
-                    break
-            if all_end_in_z:
+                curr_nodes_pos += next_node_name[-1]
+            
+            if curr_nodes_pos == "Z" * len(current_nodes):
                 end_found = True
                 break
 
