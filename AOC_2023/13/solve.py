@@ -19,10 +19,7 @@ def check_for_smudge(one, two):
         if diff_count >= 2:
             break
     
-    if diff_count == 1:
-        return True
-    else:
-        return False
+    return diff_count == 1
 
 
 def get_reflections(pattern_data, vertical=False, part_two=False):
