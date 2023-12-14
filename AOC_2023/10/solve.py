@@ -97,7 +97,7 @@ def main(input_file):
             this_sym = puzzle_input[y_index][x_index]
             if walls_hit != 0 and walls_hit % 2 != 0 and this_pos not in movement_path:
                 answer += 1
-            if this_pos in movement_path and this_sym in '|F7S':
+            if this_pos in movement_path and this_sym in '|F7S':  # Can't use L because it is effectively the same as -
                 walls_hit += 1
 
     pyperclip.copy(answer)
