@@ -27,17 +27,15 @@ def get_reflections(pattern_data, vertical=False, part_two=False):
         pattern_data = ["".join(data) for data in list(zip(*pattern_data[::-1]))]
 
     for i in range(len(pattern_data) // 2 * 2):
-        smudge_fixed = False
         curr_first = i
         curr_second = i + 1
+        smudge_fixed = False
         match = True
         while match and curr_first >= 0 and curr_second < len(pattern_data):
             match = pattern_data[curr_first] == pattern_data[curr_second]
-            if not match:
-                if part_two and not smudge_fixed:
-                    smudge_fixed = check_for_smudge(pattern_data[curr_first], pattern_data[curr_second])
-                    if smudge_fixed:
-                        match = True
+            if not match and part_two and not smudge_fixed:
+                smudge_fixed = check_for_smudge(pattern_data[curr_first], pattern_data[curr_second])
+                match = smudge_fixed
             curr_first -= 1
             curr_second += 1
         if match:
