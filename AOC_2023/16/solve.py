@@ -61,7 +61,7 @@ def track_rays(grid, starting_direction=Direction.EAST, starting_pos=(0,-1)):
                             ray.direction = new_direction[0]
                             if (new_direction[1], ray.position) not in paths_taken:
                                 rays.append(Ray(new_direction[1], ray.position))
-                                paths_taken.append((new_direction[1], ray.position))
+                                # paths_taken.append((new_direction[1], ray.position))
                     if (ray.direction, ray.position) in paths_taken:
                         ray.is_valid = False
                 else:
