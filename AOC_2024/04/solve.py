@@ -20,6 +20,7 @@ def x_mas_detector(fs_mas_s, bs_mas_s):
             bs_mid_index = bs_mas[1][1]
             if fs_mid_index == bs_mid_index:
                 x_mas_s_detected += 1
+                break
 
     return x_mas_s_detected
 
