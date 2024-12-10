@@ -71,7 +71,7 @@ def main(input_file):
     answer = 0
 
     for idx, loc in enumerate(locations_visited):
-        infinite_loop_locs = []
+        infinite_loop_locs = set()
         guard_pos = copy.copy(start_guard_pos)
         traversed_grid = copy.deepcopy(guard_grid)
         l_row, l_col = loc
@@ -96,10 +96,9 @@ def main(input_file):
                     elif guard_dir == W:
                         guard_dir = N
 
-                loc_dir = ((row, col), guard_dir)
-
+                loc_dir = (row, col, guard_dir[0], guard_dir[1])
                 if loc_dir not in infinite_loop_locs:
-                    infinite_loop_locs.append(loc_dir)
+                    infinite_loop_locs.add(loc_dir)
                 else:
                     answer += 1
                     break
