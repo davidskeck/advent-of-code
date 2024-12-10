@@ -63,6 +63,8 @@ def main(input_file):
                         calc_val *= digits[idx + 1]
                     else:
                         calc_val = int(str(calc_val) + str(digits[idx + 1]))
+                if calc_val > t_val:
+                    break
 
             if calc_val == t_val:
                 answer += t_val
