@@ -1,5 +1,5 @@
 # Advent of Code 2024
-# Day 05
+# Day 5
 
 import time
 
