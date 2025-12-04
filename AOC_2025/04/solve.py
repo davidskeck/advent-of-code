@@ -12,31 +12,27 @@ input_files = [
 
 
 def check_access(grid, r_idx, c_idx):
-    r_len = len(grid)
-    c_len = len(grid[0])
-
     conflict_count = 0
 
+    can_access = True
     st_r = r_idx - 1
     st_c = c_idx - 1
-    for i in range(3):
-        for j in range(3):
-            curr_r = st_r + i
-            curr_c = st_c + j
-            if (curr_r < 0 or curr_c < 0) or curr_r == r_idx and curr_c == c_idx:
-                continue
-            try:
-                if '@' in grid[curr_r][curr_c]:
-                    conflict_count += 1
-            except Exception:
-                pass
+    for i in range(9):
+        curr_r = st_r + (i // 3)
+        curr_c = st_c + (i % 3)
+        if (curr_r < 0 or curr_c < 0) or (curr_r == r_idx and curr_c == c_idx):
+            continue
+        try:
+            if '@' in grid[curr_r][curr_c]:
+                conflict_count += 1
+                if conflict_count >= 4:
+                    can_access = False
+                    break
+        except Exception:
+            pass
 
-    if conflict_count >= 4:
-        return False
-    else:
-        return True
+    return can_access
         
-
 
 def main(input_file):
     with open(input_file) as input_data:
