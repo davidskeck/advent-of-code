@@ -32,7 +32,6 @@ def main(input_file):
                 row_len = abs(o_tile[1] - i_tile[1]) + 1
                 rect_sizes[tuple(sorted([o_tile, i_tile]))] = col_len * row_len
     
-    # print(rect_sizes)
     answer = max(rect_sizes.values())
 
     pyperclip.copy(answer)
@@ -40,7 +39,7 @@ def main(input_file):
 
     # Part Two
     answer = 0
-    
+
     tile_shape = Polygon(red_tile_locs)
     rect_dict_sorted = dict(sorted(rect_sizes.items(), key=lambda entry: entry[1], reverse=True))
     for (o_tile, i_tile), rect_size in rect_dict_sorted.items():
